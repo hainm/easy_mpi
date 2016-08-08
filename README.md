@@ -1,4 +1,4 @@
-Embarrassing parallel for beginer
+Embarrassing parallel for beginner
 
 Usage
 =====
