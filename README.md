@@ -13,7 +13,7 @@ from map_mpi import pmap
 # write your function with given command list
 # then call
 
-data = pmap(fucn, commands)
+data = pmap(func, commands)
 if data is not None:
     # do whatever
 ```
