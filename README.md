@@ -4,6 +4,10 @@ Usage
 =====
 
 ```python
+# make my-script.py filename
+# then run: mpirun -n 8 python my-script.py
+# change '-n 8' to whatever core number
+
 from map_mpi import pmap
 
 # write your function with given command list
