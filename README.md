@@ -1,5 +1,10 @@
 Embarrassing parallel for beginner
 
+Notes
+=====
+
+package's name might be changed.
+
 Usage
 =====
 
