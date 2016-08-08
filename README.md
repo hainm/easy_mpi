@@ -63,6 +63,7 @@ time python my-script.py
 
 # parallel
 time mpirun -n 8 python my-script.py
+```
 
 Output
 ------
