@@ -41,17 +41,17 @@ Write code
 $ cat my-script.py
 
 ```python
-    from map_mpi import pmap
-    import time
+from map_mpi import pmap
+import time
 
-    def func(sub_commands):
-        for cm in sub_commands:
-            # fake expensive calculation
-            time.sleep(1.)
-            subprocess.check_call(cm.split())
-    
-    commands = ['echo "hello"' for _ in range(8)]
-    pmap(func, commands)
+def func(sub_commands):
+    for cm in sub_commands:
+        # fake expensive calculation
+        time.sleep(1.)
+        subprocess.check_call(cm.split())
+
+commands = ['echo "hello"' for _ in range(8)]
+pmap(func, commands)
 ```
 
 Run code
