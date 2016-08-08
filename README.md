@@ -41,6 +41,7 @@ Write code
 $ cat my-script.py
 
 ```python
+import subprocess
 from map_mpi import pmap
 import time
 
