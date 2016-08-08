@@ -28,7 +28,7 @@ Install
 
 .. code:: bash
 
-    pip install https://github.com/hainm/map_mpi
+    pip install git+https://github.com/amber-md/map_mpi
     # require: numpy, mpi4py
     # conda install numpy mpi4py
 
@@ -42,6 +42,7 @@ $ cat my-script.py
 
 .. code:: python
 
+    import subprocess
     from map_mpi import pmap
     import time
 
@@ -52,6 +53,10 @@ $ cat my-script.py
             subprocess.check_call(cm.split())
 
     commands = ['echo "hello"' for _ in range(8)]
+    # you can also replace commands by another list of commands
+    # e.g.: minimize 100 snapshorts in parallel, (rst7 intput filename is inp.{1, 2, 3,...}.rst7
+    # commands = ['sander -i min.in -o min.{i}.out -p prmtop -c inp.{i}.rst7 -r min.{i}.rst7'.format(i=index)
+    #             for index in range(100)]
     pmap(func, commands)
 
 Run code
