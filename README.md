@@ -27,7 +27,7 @@ Install
 =======
 
 ```bash
-pip install https://github.com/hainm/map_mpi
+pip install https://github.com/amber-md/map_mpi
 # require: numpy, mpi4py
 # conda install numpy mpi4py
 ```
