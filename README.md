@@ -52,6 +52,9 @@ def func(sub_commands):
         subprocess.check_call(cm.split())
 
 commands = ['echo "hello"' for _ in range(8)]
+# you can replace commands by another list of commands
+# e.g.: minimize 100 snapshorts in parallel, (rst7 intput filename is inp.{1, 2, 3,...}.rst7
+# commands = ['sander -i min.in -o min.{i}.out -p prmtop -c inp.{i}.rst7 -r min.{i}.rst7'.format(i=index) for indenx in range(100)]
 pmap(func, commands)
 ```
 
