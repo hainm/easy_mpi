@@ -1,0 +1,69 @@
+<p>Embarrassing parallel for beginner</p>
+<h1 id="notes">Notes</h1>
+<p>package's name might be changed.</p>
+<h1 id="usage">Usage</h1>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="co"># make my-script.py filename</span>
+<span class="co"># then run: mpirun -n 8 python my-script.py</span>
+<span class="co"># change &#39;-n 8&#39; to whatever core number</span>
+
+<span class="ch">from</span> map_mpi <span class="ch">import</span> pmap
+
+<span class="co"># write your function with given command list</span>
+<span class="co"># then call</span>
+
+data = pmap(func, commands)
+<span class="kw">if</span> data is not <span class="ot">None</span>:
+    <span class="co"># do whatever</span></code></pre>
+<h1 id="install">Install</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pip</span> install https://github.com/hainm/map_mpi
+<span class="co"># require: numpy, mpi4py</span>
+<span class="co"># conda install numpy mpi4py</span></code></pre>
+<h1 id="examples">Examples</h1>
+<h2 id="write-code">Write code</h2>
+<p>$ cat my-script.py</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">from</span> map_mpi <span class="ch">import</span> pmap
+<span class="ch">import</span> time
+
+<span class="kw">def</span> func(sub_commands):
+    <span class="kw">for</span> cm in sub_commands:
+        <span class="co"># fake expensive calculation</span>
+        time.sleep(<span class="dv">1</span>.)
+        subprocess.check_call(cm.split())
+
+commands = [<span class="st">&#39;echo &quot;hello&quot;&#39;</span> <span class="kw">for</span> _ in <span class="dt">range</span>(<span class="dv">8</span>)]
+pmap(func, commands)</code></pre>
+<h2 id="run-code">Run code</h2>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># serial</span>
+<span class="kw">time</span> python my-script.py
+
+<span class="co"># parallel</span>
+<span class="kw">time</span> mpirun -n 8 python my-script.py</code></pre>
+<h2 id="output">Output</h2>
+<h1 id="serial">serial</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">time</span> python my-script.py 
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+
+<span class="kw">real</span>    0m8.268s
+<span class="kw">user</span>    0m0.173s
+<span class="kw">sys</span> 0m0.086s</code></pre>
+<h1 id="parallel">parallel</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">time</span> mpirun -n 8 python my-script.py 
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+<span class="st">&quot;hello&quot;</span>
+
+<span class="kw">real</span>    0m1.496s
+<span class="kw">user</span>    0m1.431s
+<span class="kw">sys</span> 0m0.421s</code></pre>
